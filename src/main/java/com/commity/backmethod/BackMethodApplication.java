@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BackmethodApplication {
+public class BackMethodApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BackmethodApplication.class, args);
+        SpringApplication.run(BackMethodApplication.class, args);
     }
 
 }

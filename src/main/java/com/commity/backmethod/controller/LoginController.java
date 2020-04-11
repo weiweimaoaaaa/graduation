@@ -12,7 +12,6 @@ import org.springframework.web.util.HtmlUtils;
 
 @Controller
 public class LoginController {
-
     @Autowired
     UserLoginService userLoginService;
     @CrossOrigin
@@ -30,14 +29,16 @@ public class LoginController {
             return new Result(200,null,null);
         }
     }
-    @PostMapping(value="/api/signin")
-    public Result signin (@RequestBody UserLogin requestUser1)
+    @CrossOrigin
+    @ResponseBody
+    @PostMapping(value="/api/register")
+    public Result signIn (@RequestBody UserLogin requestUser1)
     {
         int status=userLoginService.register(requestUser1);
         switch (status){
-          case  0:return  ResultFactory.buildFailResult("用户名和密码不能为空");
+          case  0: return  ResultFactory.buildFailResult("用户名和密码不能为空");
           case  2: return ResultFactory.buildFailResult("用户已存在");
-          case 1:return ResultFactory.buildSuccessResult("注册成功");
+          case  1: return ResultFactory.buildSuccessResult("注册成功");
           default:return ResultFactory.buildSuccessResult("未知错误");
         }
     }

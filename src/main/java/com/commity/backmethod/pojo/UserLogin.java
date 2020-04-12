@@ -12,18 +12,17 @@ import javax.persistence.*;
 @JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
 public class UserLogin {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    String id;
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idcard")
+    String idCard;
     String username;
     String password;
 
-    public String getId() {
-        return id;
+    public String getIdCard() {
+        return idCard;
     }
-
-    public void setId(String id) {
-        this.id = id;
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
     }
 
     public String getUsername() {
@@ -42,7 +41,12 @@ public class UserLogin {
         this.password = password;
     }
 
-    public UserLogin() {
+    @Override
+    public String toString() {
+        return "UserLogin{" +
+                "id='" + idCard + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
-
 }

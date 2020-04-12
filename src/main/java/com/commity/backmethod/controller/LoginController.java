@@ -19,6 +19,7 @@ public class LoginController {
     @ResponseBody
     public Result login(@RequestBody UserLogin requestUser) {
         //从前端获取登录信息
+        System.out.print(requestUser);
         String username = requestUser.getUsername();
         username = HtmlUtils.htmlEscape(username);
         //调用Service层的服务来进行用户匹配，查询用户信息。返回状态码
@@ -29,12 +30,17 @@ public class LoginController {
             return new Result(200,null,null);
         }
     }
-    @CrossOrigin
+    @PostMapping(value = "/api/signin")
     @ResponseBody
-    @PostMapping(value="/api/register")
-    public Result signIn (@RequestBody UserLogin requestUser1)
+    public Result register (@RequestBody UserLogin requestUser)
     {
-        int status=userLoginService.register(requestUser1);
+
+             System.out.println(requestUser);
+            // requestUser.setId("522128222174639876");
+           //  requestUser.setUsername("tockj");
+           //  requestUser.setPassword("hello");
+            // System.out.println(requestUser);
+        int status=userLoginService.register(requestUser);
         switch (status){
           case  0: return  ResultFactory.buildFailResult("用户名和密码不能为空");
           case  2: return ResultFactory.buildFailResult("用户已存在");

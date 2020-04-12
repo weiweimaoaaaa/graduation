@@ -1,0 +1,12 @@
+POST http://localhost:8443/api/signin
+Accept: application/json
+Content-Type: application/json
+
+
+{
+  "id": "122222222222222222",
+  "username": "hrii",
+  "password": "hrii"
+}
+
+###

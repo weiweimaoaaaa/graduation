@@ -11,8 +11,6 @@ import org.springframework.web.util.HtmlUtils;
 public class UserLoginService {
     @Autowired
      UserLoginDao userLoginDao;
-
-
     public boolean isExist(String username) {//检测用户名是否存在
         UserLogin user = getByName(username);
         return null!=user;
@@ -22,22 +20,20 @@ public class UserLoginService {
         return userLoginDao.findByUsername(username);
     }
 
-
-
     public UserLogin get(String username, String password){//通过用户名和密码获取用户信息
         return userLoginDao.getByUsernameAndPassword(username, password);
     }
 
     public int register(UserLogin user) {//增加用户数据记录
         String username=user.getUsername();
-        String id=user.getId();
+        String id=user.getIdCard();
         String password=user.getPassword();
         username = HtmlUtils.htmlEscape(username);
         user.setUsername(username);
         password=HtmlUtils.htmlEscape(password);
-        user.setUsername(password);
+        user.setPassword(password);
         id=HtmlUtils.htmlEscape(id);
-        user.setId(id);
+        user.setIdCard(id);
         if(user.getPassword()==""||user.getUsername()=="")
         {
             return 0;

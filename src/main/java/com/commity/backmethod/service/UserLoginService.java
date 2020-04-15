@@ -25,15 +25,16 @@ public class UserLoginService {
     }
 
     public int register(UserLogin user) {//增加用户数据记录
+        System.out.println("service "+user);
         String username=user.getUsername();
-        String id=user.getIdCard();
+        String idCard=user.getIdCard();
         String password=user.getPassword();
         username = HtmlUtils.htmlEscape(username);
         user.setUsername(username);
         password=HtmlUtils.htmlEscape(password);
         user.setPassword(password);
-        id=HtmlUtils.htmlEscape(id);
-        user.setIdCard(id);
+        idCard=HtmlUtils.htmlEscape(idCard);
+        user.setIdCard(idCard);
         if(user.getPassword()==""||user.getUsername()=="")
         {
             return 0;

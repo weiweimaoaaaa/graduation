@@ -3,20 +3,19 @@ package com.commity.backmethod.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Date;
 
 @Entity
-@Table(name="comUserHealthInfo")
+@Table(name="comuserhealthinfo")
 @JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
 public class ComUserHealthInfo {
     @Id
     @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;//健康登记表单ID
+
     private Date  date;//登记时间
     private String userId;//用户id
     private Double temperature;//体温温度

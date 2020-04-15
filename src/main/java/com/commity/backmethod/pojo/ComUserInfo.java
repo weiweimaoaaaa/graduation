@@ -6,11 +6,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "comUserInfo")
+@Table(name = "comuserinfo")
 @JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
 public class ComUserInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     String id;//身份证号
     String name;//性名

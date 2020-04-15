@@ -14,4 +14,15 @@ public class HomeAddressService {
     {
         return homeAddressDao.getByCommunityAndUnitAndHomeNumber(community,unit,homeNumber);
     }
+    public HomeAddress register(HomeAddress homeAddress){
+        return homeAddressDao.save(homeAddress);
+    }
+    public void delete(HomeAddress homeAddress)
+    {
+        homeAddressDao.delete(homeAddress);
+    }
+    public HomeAddress getAddress(String address)//
+    {
+        return homeAddressDao.getHomeAddressById(address);
+    }
 }

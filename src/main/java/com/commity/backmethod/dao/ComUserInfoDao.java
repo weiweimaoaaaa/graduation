@@ -1,10 +1,14 @@
 package com.commity.backmethod.dao;
 
 import com.commity.backmethod.pojo.ComUserInfo;
-import com.commity.backmethod.pojo.HomeAddress;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
 
 public interface ComUserInfoDao extends JpaRepository<ComUserInfo,String> {
     ComUserInfo getComUserInfoById(String id);
-    <List>ComUserInfo getComUserInfoByAddress(HomeAddress homeAddress);
+   // ComUserInfo getComUserInfoBysAddress(String address);
+    List<ComUserInfo> getComUserInfoByAddress(String address);
+   // ComUserInfo
+    //ComUserInfo getById(String)
 }

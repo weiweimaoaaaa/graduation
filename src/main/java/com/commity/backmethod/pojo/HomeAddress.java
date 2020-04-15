@@ -7,12 +7,13 @@ import java.io.Serializable;
 
 @Entity
 @JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
-@Table(name="homeAddress")
+@Table(name="homeaddress")
 //@IdClass(PrimaryHomeAddress.class)
 public class HomeAddress
 {
     @Id
     @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//主码的产生方式
     private String id;//地址主码
     private String province;//省份
     private String city;//城市
@@ -22,6 +23,13 @@ public class HomeAddress
     private String unit;//单元
     private String homeNumber;//房间号
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getProvince() {
         return province;

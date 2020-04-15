@@ -9,14 +9,13 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "userlogin")
-@JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
+//@JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
 public class UserLogin {
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idcard")
-    String idCard;
-    String username;
-    String password;
+    private String idCard;
+    private   String username;
+    private String password;
 
     public String getIdCard() {
         return idCard;
@@ -44,7 +43,7 @@ public class UserLogin {
     @Override
     public String toString() {
         return "UserLogin{" +
-                "id='" + idCard + '\'' +
+                "idCard='" + idCard + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';

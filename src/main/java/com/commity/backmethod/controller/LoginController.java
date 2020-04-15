@@ -25,21 +25,17 @@ public class LoginController {
         //调用Service层的服务来进行用户匹配，查询用户信息。返回状态码
         UserLogin user = userLoginService.get(username, requestUser.getPassword());
         if (null == user) {
-            return new Result(400,null,null);
+            return new Result(400,"登录失败",null);
         } else {
-            return new Result(200,null,null);
+            return new Result(200,"成功登录",user);
         }
     }
+    @CrossOrigin
     @PostMapping(value = "/api/signin")
     @ResponseBody
     public Result register (@RequestBody UserLogin requestUser)
     {
-
-             System.out.println(requestUser);
-            // requestUser.setId("522128222174639876");
-           //  requestUser.setUsername("tockj");
-           //  requestUser.setPassword("hello");
-            // System.out.println(requestUser);
+             System.out.println("控制层"+requestUser);
         int status=userLoginService.register(requestUser);
         switch (status){
           case  0: return  ResultFactory.buildFailResult("用户名和密码不能为空");

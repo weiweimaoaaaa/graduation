@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.HtmlUtils;
+
+import java.util.List;
+import java.util.Objects;
+
 @Component
 @Service
 public class UserLoginService {
@@ -17,7 +21,7 @@ public class UserLoginService {
     }
 
     public UserLogin getByName(String username) {//通过用户名获取用户信息
-        return userLoginDao.findByUsername(username);
+        return userLoginDao.getByUsername(username);
     }
 
     public UserLogin get(String username, String password){//通过用户名和密码获取用户信息
@@ -35,7 +39,7 @@ public class UserLoginService {
         user.setPassword(password);
         idCard=HtmlUtils.htmlEscape(idCard);
         user.setIdCard(idCard);
-        if(user.getPassword()==""||user.getUsername()=="")
+        if(Objects.equals(user.getPassword(), "") || Objects.equals(user.getUsername(), ""))
         {
             return 0;
         }
@@ -46,7 +50,8 @@ public class UserLoginService {
         userLoginDao.save(user);
         return 1;
     }//注册用户
-
-
     public void delete(UserLogin user){userLoginDao.delete(user);}//注销账户
+    public Integer getNameLike(String name){
+        return userLoginDao.findByUsername(name).size();
+    }
 }

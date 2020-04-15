@@ -27,13 +27,10 @@ public class ComUserHealthInfoController {
     @PostMapping(value="/api/registerHealthInfo")
     public Result addTodayInfo(@RequestBody List<ComUserHealthInfo> comUserHealthInfo)
     {
-        List<ComUserHealthInfo> info =new ArrayList<>();
-        for (ComUserHealthInfo userHealthInfo : comUserHealthInfo)
-            info.add(comUserHealthInfoService.addTodayInfo(userHealthInfo));
+         List<ComUserHealthInfo> info;
+        info=comUserHealthInfoService.addTodayInfoAll(comUserHealthInfo);
         if(null==info)
-        {
-            return ResultFactory.buildFailResult("登记失败");
-        }
-        else return ResultFactory.buildSuccessResult(info);
+            return ResultFactory.buildFailResult("添加用户信息失败");
+        return ResultFactory.buildSuccessResult(info);
     }
 }

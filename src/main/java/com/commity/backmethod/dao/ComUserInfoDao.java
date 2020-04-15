@@ -8,7 +8,7 @@ import java.util.List;
 public interface ComUserInfoDao extends JpaRepository<ComUserInfo,String> {
     ComUserInfo getComUserInfoById(String id);
    // ComUserInfo getComUserInfoBysAddress(String address);
-    List<ComUserInfo> getComUserInfoByAddress(String address);
+    List<ComUserInfo> findComUserInfoByAddress(String address);
    // ComUserInfo
     //ComUserInfo getById(String)
 }

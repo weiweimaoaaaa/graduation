@@ -24,28 +24,27 @@ public class ComUserInfoService  {
 
     /**
      * 待具体详细实现
-     * @param comUserInfo
-     * @return
+     * @param comUserInfo 用户信息列表
+     * @return 返回用户的信息表
      */
     public List<ComUserInfo> register(List<ComUserInfo> comUserInfo){//注册当前的用户
         List<ComUserInfo> list=new ArrayList<>();
-        for(int i=0;i<comUserInfo.size();i++)
-        {
-            ComUserInfo info=comUserInfoDao.save(comUserInfo.get(i));
+        for (ComUserInfo userInfo : comUserInfo) {
+            ComUserInfo info = comUserInfoDao.save(userInfo);
             list.add(info);
         }
         return list;
     }
     public List<ComUserInfo> getFamilyInfo(String address){//同住人信息的获取
       //  return comUserInfoDao.get
-        return comUserInfoDao.getComUserInfoByAddress(address);
+        return comUserInfoDao.findComUserInfoByAddress(address);
     }
     public void delete(ComUserInfo comUserInfo)//删除人员。确诊或者是就医。
     {
          comUserInfoDao.delete(comUserInfo);
     }
     public Integer count(ComUserInfo comUserInfo){//统计同住人的数量
-        return   comUserInfoDao.getComUserInfoByAddress(comUserInfo.getAddress()).size();
+        return   comUserInfoDao.findComUserInfoByAddress(comUserInfo.getAddress()).size();
     }
     public ComUserInfo update(ComUserInfo comUserInfo){//由于设置主键，所以直接就实现了对数据的更新
          return comUserInfoDao.save(comUserInfo);

@@ -23,8 +23,7 @@ public class ConvenienceCardController {
     @Autowired
     ConvenienceCardService convenienceCardService;
     @Autowired
-    ComUserHealthInfoService comUserHealthInfoService;//用于获取用户的健康信息
-
+    ComUserHealthInfoService comUserHealthInfoServiceConvenience;//用于获取用户的健康信息
     /**
      * 功能：便民卡申请
      * 说明：用户的ID是身份证
@@ -39,9 +38,9 @@ public class ConvenienceCardController {
      *      用户可以第二天打开便民卡进行查看
      *
      * @param convenienceCard 用户便民卡实体
-     * @return
+     * @return  Result便民卡基本信息和返回状态码
      */
-    @PostMapping(name="/api/convenienceCardApply")
+    @PostMapping(value="/api/convenienceCardApply")
     @ResponseBody
     public Result apply(@RequestBody ConvenienceCard convenienceCard){
        if(convenienceCardService.apply(convenienceCard)==null)
@@ -56,7 +55,7 @@ public class ConvenienceCardController {
     /**
      * 功能：便民卡的状态获取
      * 便民卡的状态返回。第二天查看便面卡的申请成功与否
-     * @param apply :发送申请状态请求数据
+     * @param convenienceCard :发送申请状态请求数据
      * @return 返回申请状态码
      * --------------------------------------------
      * 首先获取申请用户的当日的健康信息表。
@@ -64,17 +63,18 @@ public class ConvenienceCardController {
      * 根据用户的健康信息来确定申请是否成功。
      */
     @ResponseBody
-    @PostMapping(name="/api/getApplyStatus")//获取申请信息状态
+    @PostMapping(value="/api/getApplyStatus")//获取申请信息状态
     public Result use(@RequestBody  ConvenienceCard convenienceCard){
         String userId=convenienceCard.getUser();//用户ID。
         Date date=new Date();//获取当前时间
         if(Math.abs(GapDate.gapDistanceDay(date,convenienceCard.getUserDate()))>=1){//处理时间已经过去了。
-            ConvenienceCard convenienceCard1=convenienceCard;
-            convenienceCard1.setFinished(2);//申请状态改变
+            ConvenienceCard convenienceCard1;
+            convenienceCard1 = convenienceCard;
+            convenienceCard1.setFinished(3);//申请状态改变
             convenienceCardService.apply(convenienceCard1);
             return new Result(400,"申请过期",400);
         }
-        ComUserHealthInfo comUserHealthInfo=comUserHealthInfoService.getTodayInfo(userId,date);
+        ComUserHealthInfo comUserHealthInfo=comUserHealthInfoServiceConvenience.getTodayInfo(userId,date);
         if(comUserHealthInfo==null)//用户还未登记健康信息
         {
             return new Result(400,"未登记当日健康信息表",404);

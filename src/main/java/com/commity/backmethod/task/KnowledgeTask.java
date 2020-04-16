@@ -3,8 +3,9 @@ package com.commity.backmethod.task;
 import com.commity.backmethod.Utils.HttpUtils;
 import com.commity.backmethod.service.KnowledgeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +32,7 @@ public class KnowledgeTask {
 
     }
     private void parse(String html)throws Exception{
-        //Document document=
+        Document document= Jsoup.parse(html);
     }
 
 }

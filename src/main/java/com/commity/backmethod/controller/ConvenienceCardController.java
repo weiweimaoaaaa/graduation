@@ -81,19 +81,19 @@ public class ConvenienceCardController {
             //代表用户未登记健康信息表。
         }
         else {
-            if((comUserHealthInfo.getCough()//用户健康信息无法满足条件。
-                    |comUserHealthInfo.getDiagnosis()
-                    |comUserHealthInfo.getGoDoctor()
-                    |comUserHealthInfo.getQuarantine()
-                    |comUserHealthInfo.getShortBreath()
-                    |comUserHealthInfo.getSuspected())==1)
+            if(comUserHealthInfo.getCough().equals("是")//用户健康信息无法满足条件。
+                    |comUserHealthInfo.getDiagnosis().equals("是")
+                    |comUserHealthInfo.getGoDoctor().equals("是")
+                    |comUserHealthInfo.getQuarantine().equals("是")
+                    |comUserHealthInfo.getShortBreath().equals("是")
+                    |comUserHealthInfo.getSuspected().equals("是"))
                 return new Result(400,"身体状况不符合申请条件",400);
-            else if((1==comUserHealthInfo.getCough())//成功申请
-                    &&(1==comUserHealthInfo.getDiagnosis())
-                    &&(1==comUserHealthInfo.getGoDoctor())
-                    &&(1==comUserHealthInfo.getQuarantine())
-                    &&(1==comUserHealthInfo.getShortBreath())
-                    &&(1==comUserHealthInfo.getSuspected())){
+            else if((comUserHealthInfo.getCough().equals("是"))//成功申请
+                    &&(comUserHealthInfo.getDiagnosis().equals("是"))
+                    &&(comUserHealthInfo.getGoDoctor().equals("是"))
+                    &&(comUserHealthInfo.getQuarantine().equals("是"))
+                    &&(comUserHealthInfo.getShortBreath().equals("是"))
+                    &&(comUserHealthInfo.getSuspected().equals("是"))){
                 //修改用户申请状态
                 ConvenienceCard convenienceCard1;
                 convenienceCard1 = convenienceCard;

@@ -2,16 +2,13 @@ package com.commity.backmethod.controller;
 
 
 import com.commity.backmethod.pojo.ComUserInfo;
-import com.commity.backmethod.pojo.HomeAddress;
 import com.commity.backmethod.result.Result;
 import com.commity.backmethod.result.ResultFactory;
 import com.commity.backmethod.service.ComUserInfoService;
-import com.commity.backmethod.service.HomeAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -20,26 +17,19 @@ import java.util.List;
 public class ComUserInfoController {
     @Autowired
     ComUserInfoService comUserInfoService;
-    @Autowired
-    HomeAddressService homeAddressService;
     /**
-     * 功能：注册用户人信息
+     * 功能：添加用户人信息
      * @param comUserInfo   用户的基本信息。参考用户实体（地址由系统生成），一次性获取所有家人的信息
-     * @param homeAddress   用户的地址信息 ，地址信息只需要一个即可。
      * @return 用户基本信息和地址信息
      */
     @PostMapping(value="/api/userInfoRegister")
     @ResponseBody
-    public Result register(@RequestBody List<ComUserInfo> comUserInfo, @RequestBody HomeAddress  homeAddress)
+    public Result register(@RequestBody ComUserInfo comUserInfo)
     {
-        for(int i=0;i<comUserInfo.size();i++)//设置对象的地址属性
-        {
-            comUserInfo.get(i).setAddress(homeAddress.getId());
-        }
-            if(comUserInfoService.register(comUserInfo)!=null&&homeAddressService.register(homeAddress)!=null)
+        //设置对象的地址属性
+            if(comUserInfoService.register(comUserInfo)!=null)
             {
-                Object[] object={comUserInfo,homeAddress};
-                return ResultFactory.buildSuccessResult(object);
+                return ResultFactory.buildSuccessResult(comUserInfo);
             }
             else return ResultFactory.buildFailResult("添加用户信息失败");
     }
@@ -53,10 +43,7 @@ public class ComUserInfoController {
     @ResponseBody
     public Result delete(@RequestBody ComUserInfo comUserInfo)
     {
-        String address=comUserInfo.getAddress();
         comUserInfoService.delete(comUserInfo);
-        if(comUserInfoService.count(comUserInfo)==0)
-            homeAddressService.delete(homeAddressService.getAddress(address));//删除地址信息
         return ResultFactory.buildSuccessResult(comUserInfo);
     }
     /**

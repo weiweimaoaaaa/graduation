@@ -11,11 +11,11 @@ import javax.persistence.*;
 public class ComUserInfo {
     @Id
     @Column(name="id")
-    String id;//身份证号
-    String name;//性名
-    Integer sex;//性别
-    String phone;//电话号码
-    String address;//家庭住址
+    private  String id;//身份证号
+    private  String name;//性名
+    private Integer sex;//性别
+    private  String phone;//电话号码
+    private String address;//家庭住址
 
     public String getId() {
         return id;

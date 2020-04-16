@@ -1,9 +1,7 @@
 package com.commity.backmethod.service;
 
 import com.commity.backmethod.dao.ComUserInfoDao;
-import com.commity.backmethod.dao.HomeAddressDao;
 import com.commity.backmethod.pojo.ComUserInfo;
-import com.commity.backmethod.pojo.HomeAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,8 +14,6 @@ public class ComUserInfoService  {
 
     @Autowired
     ComUserInfoDao comUserInfoDao;//用户信息查询的接口
-    @Autowired
-    HomeAddressDao homeAddressDao;//用户的地址信息接口
     public Boolean isExist(String id)//当前用户是否存在
     {
         return null!=comUserInfoDao.getComUserInfoById(id);
@@ -28,13 +24,8 @@ public class ComUserInfoService  {
      * @return 返回用户的信息表
      */
     @Transactional
-    public List<ComUserInfo> register(List<ComUserInfo> comUserInfo){//注册当前的用户
-        List<ComUserInfo> list=new ArrayList<>();
-        for (ComUserInfo userInfo : comUserInfo) {
-            ComUserInfo info = comUserInfoDao.save(userInfo);
-            list.add(info);
-        }
-        return list;
+    public ComUserInfo register(ComUserInfo comUserInfo){//注册当前的用户
+           return comUserInfoDao.save(comUserInfo);
     }
     public List<ComUserInfo> getFamilyInfo(String address){//同住人信息的获取
       //  return comUserInfoDao.get

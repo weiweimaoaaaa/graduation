@@ -6,6 +6,7 @@ import com.commity.backmethod.pojo.ComUserInfo;
 import com.commity.backmethod.pojo.HomeAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +22,12 @@ public class ComUserInfoService  {
     {
         return null!=comUserInfoDao.getComUserInfoById(id);
     }
-
     /**
      * 待具体详细实现
      * @param comUserInfo 用户信息列表
      * @return 返回用户的信息表
      */
+    @Transactional
     public List<ComUserInfo> register(List<ComUserInfo> comUserInfo){//注册当前的用户
         List<ComUserInfo> list=new ArrayList<>();
         for (ComUserInfo userInfo : comUserInfo) {
@@ -39,6 +40,7 @@ public class ComUserInfoService  {
       //  return comUserInfoDao.get
         return comUserInfoDao.findComUserInfoByAddress(address);
     }
+    @Transactional
     public void delete(ComUserInfo comUserInfo)//删除人员。确诊或者是就医。
     {
          comUserInfoDao.delete(comUserInfo);

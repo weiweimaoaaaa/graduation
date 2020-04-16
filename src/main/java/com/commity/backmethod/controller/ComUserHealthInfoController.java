@@ -33,4 +33,5 @@ public class ComUserHealthInfoController {
             return ResultFactory.buildFailResult("添加用户信息失败");
         return ResultFactory.buildSuccessResult(info);
     }
+    //有待补充功能
 }

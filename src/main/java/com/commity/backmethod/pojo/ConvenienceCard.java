@@ -1,10 +1,7 @@
 package com.commity.backmethod.pojo;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -15,11 +12,10 @@ import java.util.Date;
 public class ConvenienceCard {
     @Id
     @Column(name="id")//主码
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//主码的产生方式
     private String id;
     private String user;//用户ID
-    @Column(name="applydate")
     private Date  applyDate;//申请时间
-    @Column(name="userdate")
     private Date  userDate;//使用时间
     /**
      * 便民卡的周期应该是三个阶段：

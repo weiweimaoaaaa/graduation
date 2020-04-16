@@ -44,7 +44,9 @@ public class ComUserInfoService  {
     }
     public ComUserInfo getInfo(String id )
     {
-        return comUserInfoDao.getComUserInfoById(id );
+        ComUserInfo info= comUserInfoDao.findComUserInfoById(id);
+       // System.out.println("服务层信息"+info);
+        return info;
     }
 
 }

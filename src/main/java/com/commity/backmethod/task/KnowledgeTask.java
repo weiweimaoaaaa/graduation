@@ -32,7 +32,10 @@ public class KnowledgeTask {
 
     }
     private void parse(String html)throws Exception{
+        //解析HTML获取Dom对象
         Document document= Jsoup.parse(html);
+        //获取
+
     }
 
 }

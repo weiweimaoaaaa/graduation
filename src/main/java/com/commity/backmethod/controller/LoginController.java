@@ -25,6 +25,7 @@ public class LoginController {
         //调用Service层的服务来进行用户匹配，查询用户信息。返回状态码
         UserLogin user = userLoginService.get(username, requestUser.getPassword());
         //System.out.println("数组功能测试"+userLoginService.getNameLike(username));//测试
+        System.out.println("密码："+requestUser.getPassword()+"账号"+requestUser.getUsername());
         if (null == user) {
             return new Result(400,"登录失败",null);
         } else {

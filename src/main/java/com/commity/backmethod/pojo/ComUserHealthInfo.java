@@ -19,13 +19,13 @@ public class ComUserHealthInfo {
     private Date  date;//登记时间
     private String userId;//用户id
     private Double temperature;//体温温度
-    private Integer cough;//是否咳嗽
-    private Integer shortBreath;//是否气促
-    private Integer goDoctor;//是否就医
-    private Integer quarantine;//是否隔离
+    private String  cough;//是否咳嗽
+    private String shortBreath;//是否气促
+    private String goDoctor;//是否就医
+    private String quarantine;//是否隔离
     private String  hospital;//就医医院
-    private Integer diagnosis;//是否确证
-    private Integer suspected;//是否疑似
+    private String diagnosis;//是否确证
+    private String suspected;//是否疑似
 
     public String getId() {
         return id;
@@ -59,35 +59,35 @@ public class ComUserHealthInfo {
         this.temperature = temperature;
     }
 
-    public Integer getCough() {
+    public String getCough() {
         return cough;
     }
 
-    public void setCough(Integer cough) {
+    public void setCough(String cough) {
         this.cough = cough;
     }
 
-    public Integer getShortBreath() {
+    public String getShortBreath() {
         return shortBreath;
     }
 
-    public void setShortBreath(Integer shortBreath) {
+    public void setShortBreath(String shortBreath) {
         this.shortBreath = shortBreath;
     }
 
-    public Integer getGoDoctor() {
+    public String getGoDoctor() {
         return goDoctor;
     }
 
-    public void setGoDoctor(Integer goDoctor) {
+    public void setGoDoctor(String goDoctor) {
         this.goDoctor = goDoctor;
     }
 
-    public Integer getQuarantine() {
+    public String getQuarantine() {
         return quarantine;
     }
 
-    public void setQuarantine(Integer quarantine) {
+    public void setQuarantine(String quarantine) {
         this.quarantine = quarantine;
     }
 
@@ -99,18 +99,18 @@ public class ComUserHealthInfo {
         this.hospital = hospital;
     }
 
-    public Integer getDiagnosis() {
+    public String getDiagnosis() {
         return diagnosis;
     }
 
-    public void setDiagnosis(Integer diagnosis) {
+    public void setDiagnosis(String diagnosis) {
         this.diagnosis = diagnosis;
     }
 
-    public Integer getSuspected() {
+    public String getSuspected() {
         return suspected;
     }
-    public void setSuspected(Integer suspected) {
+    public void setSuspected(String suspected) {
         this.suspected = suspected;
     }
 }

@@ -41,7 +41,7 @@ public class ComUserHealthInfoService {
      * @param cough 咳嗽与否
      * @return 咳嗽人数
      */
-    public Integer  getCountCough(Date date,Integer cough){//获取咳嗽的人述
+    public Integer  getCountCough(Date date,String cough){//获取咳嗽的人述
         return comUserHealthInfoDao.findComUserHealthInfoByDateAndCough(date,cough).size();
     }
 
@@ -51,7 +51,7 @@ public class ComUserHealthInfoService {
      * @param shortBreath 气促与否
      * @return 气促人数
      */
-    public Integer getCountShortBreath(Date date,Integer shortBreath){
+    public Integer getCountShortBreath(Date date,String shortBreath){
         return comUserHealthInfoDao.findComUserHealthInfoByDateAndShortBreath(date,shortBreath).size();
     }
 
@@ -61,7 +61,7 @@ public class ComUserHealthInfoService {
      * @param goDoctor 是否就医
      * @return 就医人数
      */
-    public Integer getCountGoDoctor(Date date,Integer goDoctor){
+    public Integer getCountGoDoctor(Date date,String goDoctor){
         return comUserHealthInfoDao.findComUserHealthInfoByDateAndGoDoctor(date,goDoctor).size();
     }
 
@@ -72,7 +72,7 @@ public class ComUserHealthInfoService {
      * @return 隔离人数
      */
 
-    public Integer getCountQuarantine(Date date,Integer quarantine){
+    public Integer getCountQuarantine(Date date,String quarantine){
         return comUserHealthInfoDao.findComUserHealthInfoByDateAndQuarantine(date,quarantine).size();
     }
 
@@ -83,7 +83,7 @@ public class ComUserHealthInfoService {
      * @param diagnose 确诊
      * @return 确诊人数
      */
-    public Integer getCountDiagnose(Date date,Integer diagnose){
+    public Integer getCountDiagnose(Date date,String diagnose){
         return comUserHealthInfoDao.findComUserHealthInfoByDateAndDiagnosis(date,diagnose).size();
     }
 
@@ -93,7 +93,7 @@ public class ComUserHealthInfoService {
      * @param suspected 疑似与否。
      * @return 疑似人数
      */
-    public Integer getCountSuspected(Date date,Integer suspected){
+    public Integer getCountSuspected(Date date,String suspected){
         return comUserHealthInfoDao.findComUserHealthInfoByDateAndSuspected(date,suspected).size();
     }
 }

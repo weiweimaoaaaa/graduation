@@ -36,7 +36,7 @@ public class ComUserInfoController {
 
     /**
      * 功能：删除指定的人的基本信息
-     * @param comUserInfo
+     * @param comUserInfo 用户信息
      * @return 该人的基本信息
      */
     @PostMapping(value="/api/deleteUserInfo")//前端接口与传递方式
@@ -48,7 +48,7 @@ public class ComUserInfoController {
     }
     /**
      *功能：修改个人信息
-     * @param comUserInfo
+     * @param comUserInfo 用户信息
      * @return 返回该人修改后的信息
      */
     @PostMapping(value="/api/updateUserInfo")

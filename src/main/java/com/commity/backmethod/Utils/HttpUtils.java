@@ -45,7 +45,7 @@ public class HttpUtils {
         HttpGet httpGet = new HttpGet(url);
         httpGet.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36");
 
-        //httpGet.setHeader("Referer", "https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&enc=utf-8&wq=%E6%89%8B%E6%9C%BA&pvid=b1a43153d64f4920a10f8ca31aa6fa6b");
+        httpGet.setHeader("Referer", "https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&enc=utf-8&wq=%E6%89%8B%E6%9C%BA&pvid=b1a43153d64f4920a10f8ca31aa6fa6b");
         //设置请求信息
 
         httpGet.setConfig(this.getConfig());
@@ -91,6 +91,7 @@ public class HttpUtils {
         //设置HttpGet请求对象  设置url
         HttpGet httpGet;
         httpGet = new HttpGet(url);
+       // httpGet.
 
         httpGet.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36");
 
@@ -114,7 +115,7 @@ public class HttpUtils {
                     String picName = UUID.randomUUID().toString()+extName;
                     //下载图片
                     //声明OutputStream
-                    OutputStream outputStream = new FileOutputStream(new File("C:\\Users\\mac12\\Desktop\\手机图片\\"+picName));
+                    OutputStream outputStream = new FileOutputStream(new File("C:\\Users\\u2016\\Desktop\\手机图片\\"+picName));
                     response.getEntity().writeTo(outputStream);
                     //返回图片名称
                     return picName;

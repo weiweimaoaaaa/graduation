@@ -14,7 +14,6 @@ import java.util.List;
 public class KnowledgeService {
     @Autowired
     KnowledgeDao knowledgeDao;
-
     /**
      * 保存新闻到数据库
      * @param knowledge 新闻对象呢
@@ -31,5 +30,8 @@ public class KnowledgeService {
         org.springframework.data.domain.Example<Knowledge> example = Example.of(item);
         //依据查询条件来查询数据
        return  this.knowledgeDao.findAll(example);
+    }
+    public List<Knowledge> getAll(String date){
+        return knowledgeDao.findKnowledgeByDateAfter(date);
     }
 }

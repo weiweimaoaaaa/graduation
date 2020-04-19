@@ -70,10 +70,8 @@ public class MaterialApplyController {
     @PostMapping(value="/api/registerMaterialsApply")
     public Result registerMaterialsApply(@RequestBody List<MaterialApply> materialApplyList){
         for (MaterialApply materialApply : materialApplyList) {
-            if (materialApply.getFinished() == null) {
                 materialApply.setFinished(1);
                 System.out.println("设置finished属性");
-            }
         }
         List<MaterialApply> materials=materialApplyService.registerMaterialsInfo(materialApplyList);
         if(null==materials){

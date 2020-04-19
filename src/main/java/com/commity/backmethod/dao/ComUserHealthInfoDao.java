@@ -14,6 +14,7 @@ public interface ComUserHealthInfoDao extends JpaRepository<ComUserHealthInfo, L
     ComUserHealthInfo getComUserHealthInfoDaoByDate(Date date);//获取当天的用户信息
     ComUserHealthInfo getComUserHealthInfoByTemperature(Double temperature);//获取温度
     ComUserHealthInfo getComUserHealthInfoByCough(String cough);
+    List<ComUserHealthInfo> findComUserHealthInfoByDateAndGoDoctorAndDiagnosis(Date date,String diagnosis,String goDoctor);
     ComUserHealthInfo getComUserHealthInfoByUserId(String id);
     ComUserHealthInfo getComUserHealthInfoByUserIdAndDate(String id,Date date);//获取当天的用户的健康信息
     List<ComUserHealthInfo> findComUserHealthInfoByDateAndCough(Date date,String cough);//获取当天咳嗽的人的信息

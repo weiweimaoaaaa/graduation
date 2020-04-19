@@ -44,10 +44,17 @@ public class ConvenienceCardController {
     @PostMapping(value="/api/convenienceCardApply")
     @ResponseBody
     public Result apply(@RequestBody List<ConvenienceCard> convenienceCard){
-        for (ConvenienceCard card : convenienceCard) {
-            if (card.getFinished() == null) {
-                card.setFinished(1);
+        for (ConvenienceCard card : convenienceCard) {card.setFinished(1);}
+        for(int i=0;i<convenienceCard.size();i++) {
+            if (convenienceCardService.getCard(convenienceCard.get(i).getUser(), convenienceCard.get(i).getApplyDate()) != null) {
+                convenienceCard.remove(i);
+                i --;
             }
+        }
+       // System.out.println("数组长度"+convenienceCard.size());
+        if(convenienceCard.size()==0){
+            System.out.println("不能重复提交");
+            return ResultFactory.buildFailResult("不能重复提交");
         }
        if(convenienceCardService.apply(convenienceCard)==null)
        {
@@ -72,7 +79,7 @@ public class ConvenienceCardController {
     public Result use(@RequestBody  ConvenienceCard convenienceCard){
         String userId=convenienceCard.getUser();//用户ID。
         Date date=new Date();//获取当前时间
-        if(Math.abs(GapDate.gapDistanceDay(date,convenienceCard.getUserDate()))>=1){//处理时间已经过去了。
+        if(Math.abs(GapDate.gapDistanceDay(date,convenienceCard.getUserDate()))>1){//处理时间已经过去了。
             ConvenienceCard convenienceCard1;
             convenienceCard1 = convenienceCard;
             convenienceCard1.setFinished(3);//申请状态改变
@@ -104,7 +111,7 @@ public class ConvenienceCardController {
                 convenienceCard1 = convenienceCard;
                 convenienceCard1.setFinished(2);//申请状态改变
                 convenienceCardService.apply(convenienceCard1);
-                return new Result(200,"成功申请",200);
+                return new Result(200,"成功申请",convenienceCard1);
             }
         else  return new Result(400,"申请失败",500);//未知原因导致申请失败
         }

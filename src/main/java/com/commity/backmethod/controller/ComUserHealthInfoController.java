@@ -1,5 +1,7 @@
 package com.commity.backmethod.controller;
+import com.commity.backmethod.Utils.DayBefore;
 import com.commity.backmethod.pojo.ComUserHealthInfo;
+import com.commity.backmethod.pojo.EpidemicNumber;
 import com.commity.backmethod.result.Result;
 import com.commity.backmethod.result.ResultFactory;
 import com.commity.backmethod.service.ComUserHealthInfoService;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -47,6 +50,25 @@ public class ComUserHealthInfoController {
         if(null==info)
             return ResultFactory.buildFailResult("添加用户信息失败");
         return ResultFactory.buildSuccessResult(info);
+   }
+    @PostMapping(value="/api/getEpidemicNumber")
+    @ResponseBody
+    public Result getEpidemicNumber(@RequestBody Date date){
+        List<EpidemicNumber> list=new ArrayList<>();
+        DayBefore dayBefore=new DayBefore(date);
+        List<Date> dateList=dayBefore.beforeDays();
+        for(int i=0;i<7;i++){
+            EpidemicNumber epidemicNumber = new EpidemicNumber();
+            epidemicNumber.setCoughNumber(comUserHealthInfoService.getCountCough(dateList.get(i),"是"));
+            epidemicNumber.setDiagnosisNumber(comUserHealthInfoService.getCountDiagnose(dateList.get(i),"是"));
+            epidemicNumber.setGoDoctorAndDiagnosisNumber(comUserHealthInfoService.getGoDoctorAndDiagnosis(dateList.get(i),"是","是"));
+            epidemicNumber.setGoDoctorNumber(comUserHealthInfoService.getCountGoDoctor(dateList.get(i),"是"));
+            epidemicNumber.setQuarantineNumber(comUserHealthInfoService.getCountQuarantine(dateList.get(i),"是"));
+            epidemicNumber.setShortBreathNumber(comUserHealthInfoService.getCountShortBreath(dateList.get(i),"是"));
+            epidemicNumber.setSuspectedNumber(comUserHealthInfoService.getCountSuspected(dateList.get(i),"是"));
+            list.add(epidemicNumber);
+        }
+        return ResultFactory.buildSuccessResult(list);
     }
-    //有待补充功能
+
 }

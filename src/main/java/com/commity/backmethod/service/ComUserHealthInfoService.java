@@ -99,4 +99,7 @@ public class ComUserHealthInfoService {
     public Integer getCountSuspected(Date date,String suspected){
         return comUserHealthInfoDao.findComUserHealthInfoByDateAndSuspected(date,suspected).size();
     }
+    public Integer getGoDoctorAndDiagnosis(Date date,String diagnosis,String goDoctor){
+        return comUserHealthInfoDao.findComUserHealthInfoByDateAndGoDoctorAndDiagnosis(date, diagnosis, goDoctor).size();
+    }
 }

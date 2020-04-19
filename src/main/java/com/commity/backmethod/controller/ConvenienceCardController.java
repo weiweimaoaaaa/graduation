@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 //import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class ConvenienceCardController {
@@ -42,7 +43,7 @@ public class ConvenienceCardController {
      */
     @PostMapping(value="/api/convenienceCardApply")
     @ResponseBody
-    public Result apply(@RequestBody ConvenienceCard convenienceCard){
+    public Result apply(@RequestBody List<ConvenienceCard> convenienceCard){
        if(convenienceCardService.apply(convenienceCard)==null)
        {
            return ResultFactory.buildFailResult("申请失败");
@@ -50,7 +51,6 @@ public class ConvenienceCardController {
        else
            return  new Result(200,"申请有待批示",convenienceCard);
     }
-
 
     /**
      * 功能：便民卡的状态获取
@@ -67,7 +67,7 @@ public class ConvenienceCardController {
     public Result use(@RequestBody  ConvenienceCard convenienceCard){
         String userId=convenienceCard.getUser();//用户ID。
         Date date=new Date();//获取当前时间
-        if(Math.abs(GapDate.gapDistanceDay(date,convenienceCard.getUserDate()))>=1){//处理时间已经过去了。
+        if(Math.abs(GapDate.gapDistanceDay(date,convenienceCard.getUseDate()))>=1){//处理时间已经过去了。
             ConvenienceCard convenienceCard1;
             convenienceCard1 = convenienceCard;
             convenienceCard1.setFinished(3);//申请状态改变

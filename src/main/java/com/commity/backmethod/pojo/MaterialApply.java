@@ -1,6 +1,9 @@
 package com.commity.backmethod.pojo;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -12,7 +15,8 @@ public class MaterialApply {
     @GeneratedValue(strategy = GenerationType.IDENTITY)//主码的产生方式
     private String id;//物资申请id
     private String user;//申请人ID
-    @Column(name="applyDate")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date applyDate;//申请时间
     private String category;//物资分类
     private String name;//物资名字

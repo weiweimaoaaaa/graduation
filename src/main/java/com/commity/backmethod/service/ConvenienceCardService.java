@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class ConvenienceCardService {
     @Autowired
@@ -23,6 +25,9 @@ public class ConvenienceCardService {
     public ConvenienceCard apply(ConvenienceCard convenienceCard)
     {
         return convenienceCardDao.save(convenienceCard);
+    }
+    public List<ConvenienceCard> apply(List<ConvenienceCard> convenienceCards){
+        return convenienceCardDao.saveAll(convenienceCards);
     }
     public ConvenienceCard getCard(String id){
         return convenienceCardDao.getConvenienceCardByUser(id);

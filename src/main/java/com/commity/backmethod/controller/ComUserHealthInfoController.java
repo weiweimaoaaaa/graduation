@@ -28,6 +28,12 @@ public class ComUserHealthInfoController {
     public Result addTodayInfo(@RequestBody List<ComUserHealthInfo> comUserHealthInfo)
     {
          List<ComUserHealthInfo> info;
+         for(int i=0;i<comUserHealthInfo.size();i++)
+         {
+             if(comUserHealthInfo.get(i).getGoDoctor()==null){
+                 comUserHealthInfo.get(i).setGoDoctor("无");
+             }
+         }
         info=comUserHealthInfoService.addTodayInfoAll(comUserHealthInfo);
         if(null==info)
             return ResultFactory.buildFailResult("添加用户信息失败");

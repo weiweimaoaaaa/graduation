@@ -1,7 +1,9 @@
 package com.commity.backmethod.pojo;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -13,9 +15,10 @@ import java.util.Date;
 public class ComUserHealthInfo {
     @Id
     @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;//健康登记表单ID
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;//健康登记表单ID
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date  date;//登记时间
     private String userId;//用户id
     private Double temperature;//体温温度
@@ -27,28 +30,35 @@ public class ComUserHealthInfo {
     private String diagnosis;//是否确证
     private String suspected;//是否疑似
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     public Date getDate() {
         return date;
     }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
     public String getUserId() {
         return userId;
     }
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getGoDoctor() {
+        return goDoctor;
+    }
+
+    public void setGoDoctor(String goDoctor) {
+        this.goDoctor = goDoctor;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Double getTemperature() {
@@ -73,14 +83,6 @@ public class ComUserHealthInfo {
 
     public void setShortBreath(String shortBreath) {
         this.shortBreath = shortBreath;
-    }
-
-    public String getGoDoctor() {
-        return goDoctor;
-    }
-
-    public void setGoDoctor(String goDoctor) {
-        this.goDoctor = goDoctor;
     }
 
     public String getQuarantine() {

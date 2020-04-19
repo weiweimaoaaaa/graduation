@@ -1,6 +1,9 @@
 package com.commity.backmethod.pojo;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -15,14 +18,18 @@ public class ConvenienceCard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)//主码的产生方式
     private String id;
     private String user;//用户ID
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date  applyDate;//申请时间
-    private Date  userDate;//使用时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date  useDate;//使用时间
     /**
      * 便民卡的周期应该是三个阶段：
      * 1. 申请阶段
      * 2. 使用阶段
      * 3. 使用结束阶段
-     * ---------------------
+     * -------------------
      * | 申请 | 使用 |结束 |
      * -------------------
      * |   1 |  2   |  3 |
@@ -55,16 +62,16 @@ public class ConvenienceCard {
         this.applyDate = applyDate;
     }
 
-    public Date getUserDate() {
-        return userDate;
-    }
-
-    public void setUserDate(Date userDate) {
-        this.userDate = userDate;
-    }
-
     public Integer getFinished() {
         return finished;
+    }
+
+    public Date getUseDate() {
+        return useDate;
+    }
+
+    public void setUseDate(Date useDate) {
+        this.useDate = useDate;
     }
 
     public void setFinished(Integer finished) {

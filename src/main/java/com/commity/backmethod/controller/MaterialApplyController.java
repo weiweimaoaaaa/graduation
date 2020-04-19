@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 public class MaterialApplyController {
     @Autowired
@@ -27,6 +29,16 @@ public class MaterialApplyController {
     }
 
     /**
+     * 获取物资信息列表
+     * @param id 用户id
+     * @return 物资信息表
+     */
+    @PostMapping(value="/api/getMaterialsApplyInfo")
+    @ResponseBody
+    public List<MaterialApply> getAppliesInfo(@RequestBody String id){
+        return materialApplyService.getApplies(id);
+    }
+    /**
      * 提交物资申请
      * @param materialApply 物资信息
      * @return 物资申请后的实体信息
@@ -38,6 +50,21 @@ public class MaterialApplyController {
             return ResultFactory.buildFailResult("申请失败");
         }
         else return ResultFactory.buildSuccessResult(material);
+    }
+
+    /**
+     * 以数组的形式申请物资。
+     * @param materialApplyList 物资信息表
+     * @return 申请状态和物资信息
+     */
+    @PostMapping(value="/api/registerMaterialsApply")
+    public Result registerMaterialsApply(@RequestBody List<MaterialApply> materialApplyList){
+        List<MaterialApply> materials=materialApplyService.registerMaterialsInfo(materialApplyList);
+        if(null==materials){
+            return ResultFactory.buildFailResult("申请失败");
+        }
+        return ResultFactory.buildSuccessResult(materials);//返回申请的信息
+
     }
 
 }

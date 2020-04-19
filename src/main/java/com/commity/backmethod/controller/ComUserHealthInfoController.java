@@ -27,6 +27,15 @@ public class ComUserHealthInfoController {
     @PostMapping(value="/api/registerHealthInfo")
     public Result addTodayInfo(@RequestBody List<ComUserHealthInfo> comUserHealthInfo)
     {
+        /**
+         * 问题描述：同一个人多次填报未解决 解决方案的进一步完善
+         */
+        for (ComUserHealthInfo userHealthInfo : comUserHealthInfo) {
+            if (comUserHealthInfoService.getUserInfo(userHealthInfo.getUserId()) != null) {
+                System.out.println("不可重复提交");
+                return ResultFactory.buildFailResult("不可以重复登记");
+            }
+        }
          List<ComUserHealthInfo> info;
          for(int i=0;i<comUserHealthInfo.size();i++)
          {

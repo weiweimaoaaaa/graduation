@@ -33,6 +33,9 @@ public class ComUserHealthInfoService {
     public ComUserHealthInfo getTodayInfo(String id, Date date){
         return comUserHealthInfoDao.getComUserHealthInfoByUserIdAndDate(id,date);
     }
+    public ComUserHealthInfo getUserInfo(String id){
+        return comUserHealthInfoDao.getComUserHealthInfoByUserId(id);
+    }
 
 
     /**

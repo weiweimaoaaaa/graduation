@@ -43,6 +43,7 @@ public class MaterialApplyController {
      * @param materialApply 物资信息
      * @return 物资申请后的实体信息
      */
+    @ResponseBody
     @PostMapping(value="/api/registerMaterialApply")
     public Result registerMaterialApply(@RequestBody MaterialApply materialApply){
         MaterialApply material=materialApplyService.registerMaterialInfo(materialApply);
@@ -57,6 +58,7 @@ public class MaterialApplyController {
      * @param materialApplyList 物资信息表
      * @return 申请状态和物资信息
      */
+    @ResponseBody
     @PostMapping(value="/api/registerMaterialsApply")
     public Result registerMaterialsApply(@RequestBody List<MaterialApply> materialApplyList){
         List<MaterialApply> materials=materialApplyService.registerMaterialsInfo(materialApplyList);

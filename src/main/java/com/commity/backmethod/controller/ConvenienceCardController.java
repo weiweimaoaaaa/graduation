@@ -44,6 +44,11 @@ public class ConvenienceCardController {
     @PostMapping(value="/api/convenienceCardApply")
     @ResponseBody
     public Result apply(@RequestBody List<ConvenienceCard> convenienceCard){
+        for (ConvenienceCard card : convenienceCard) {
+            if (card.getFinished() == null) {
+                card.setFinished(1);
+            }
+        }
        if(convenienceCardService.apply(convenienceCard)==null)
        {
            return ResultFactory.buildFailResult("申请失败");
@@ -67,7 +72,7 @@ public class ConvenienceCardController {
     public Result use(@RequestBody  ConvenienceCard convenienceCard){
         String userId=convenienceCard.getUser();//用户ID。
         Date date=new Date();//获取当前时间
-        if(Math.abs(GapDate.gapDistanceDay(date,convenienceCard.getUseDate()))>=1){//处理时间已经过去了。
+        if(Math.abs(GapDate.gapDistanceDay(date,convenienceCard.getUserDate()))>=1){//处理时间已经过去了。
             ConvenienceCard convenienceCard1;
             convenienceCard1 = convenienceCard;
             convenienceCard1.setFinished(3);//申请状态改变

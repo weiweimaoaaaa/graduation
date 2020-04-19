@@ -13,16 +13,14 @@ import java.util.List;
 public class MaterialApplyService {
     @Autowired
     MaterialApplyDao materialApplyDao;
-
     /**
      * 获取物资申请信息
      * @param id 用户ID
      * @return 用户物资申请信息
      */
     public MaterialApply getApply(String id){
-        return materialApplyDao.getMaterialApplyById(id);
+        return materialApplyDao.getMaterialApplyByUser(id);
     }
-
     /**
      * 获取用户的申请物资信息表
      * @param id 用户的id
@@ -50,5 +48,35 @@ public class MaterialApplyService {
     @Transactional
     public List<MaterialApply> registerMaterialsInfo(List<MaterialApply> materialApplies){
         return materialApplyDao.saveAll(materialApplies);
+    }
+
+    /**
+     * 获取用户的各类商品的物资信息
+     * @param userId 用户ID
+     * @param category 分类
+     * @return 用户各类物资信息
+     */
+    public List<MaterialApply> getMaterialByUserAndCategory(String userId,String category){
+       return  materialApplyDao.findByUserAndCategory(userId,category);
+    }
+    /**
+     * 获取每个用户的各类物资里面各种物资的信息。
+     * 比如获取id=1的用户的生活用品中卫生纸的信息。
+     * @param userId 用户id
+     * @param category 分类
+     * @param name 物资名称
+     * @return  每个用户的各类物资里面各种物资的信息。
+     */
+    public List<MaterialApply> getMaterialByUserAndCategoryAndName(String userId,String category,String name){
+        return materialApplyDao.findByUserAndCategoryAndName(userId, category, name);
+    }
+    /**
+     *获取每一类中具体的商品的信息
+     * @param category 类别
+     * @param name 名称
+     * @return 每一类中具体的商品的信息
+     */
+    public List<MaterialApply> getMaterialByCategoryAndName(String category,String name){
+        return materialApplyDao.findByCategoryAndName(category, name);
     }
 }

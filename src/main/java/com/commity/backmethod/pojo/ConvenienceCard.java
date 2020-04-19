@@ -23,7 +23,7 @@ public class ConvenienceCard {
     private Date  applyDate;//申请时间
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date  useDate;//使用时间
+    private Date  userDate;//使用时间
     /**
      * 便民卡的周期应该是三个阶段：
      * 1. 申请阶段
@@ -66,12 +66,12 @@ public class ConvenienceCard {
         return finished;
     }
 
-    public Date getUseDate() {
-        return useDate;
+    public Date getUserDate() {
+        return userDate;
     }
 
-    public void setUseDate(Date useDate) {
-        this.useDate = useDate;
+    public void setUserDate(Date userDate) {
+        this.userDate = userDate;
     }
 
     public void setFinished(Integer finished) {

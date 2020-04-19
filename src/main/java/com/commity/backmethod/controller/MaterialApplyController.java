@@ -57,16 +57,29 @@ public class MaterialApplyController {
      * 以数组的形式申请物资。
      * @param materialApplyList 物资信息表
      * @return 申请状态和物资信息
+     *
+     *
+     * 申请状态表
+     * -------------------------
+     * | 申请   | 使用    |
+     * ---------------------
+     * |   1   |  2     |
+     * --------------------------
      */
     @ResponseBody
     @PostMapping(value="/api/registerMaterialsApply")
     public Result registerMaterialsApply(@RequestBody List<MaterialApply> materialApplyList){
+        for (MaterialApply materialApply : materialApplyList) {
+            if (materialApply.getFinished() == null) {
+                materialApply.setFinished(1);
+                System.out.println("设置finished属性");
+            }
+        }
         List<MaterialApply> materials=materialApplyService.registerMaterialsInfo(materialApplyList);
         if(null==materials){
             return ResultFactory.buildFailResult("申请失败");
         }
         return ResultFactory.buildSuccessResult(materials);//返回申请的信息
-
     }
 
 }

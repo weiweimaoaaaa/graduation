@@ -6,7 +6,7 @@ import sun.util.resources.ga.LocaleNames_ga;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.beans.IntrospectionException;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 public interface ComUserHealthInfoDao extends JpaRepository<ComUserHealthInfo, Long> {

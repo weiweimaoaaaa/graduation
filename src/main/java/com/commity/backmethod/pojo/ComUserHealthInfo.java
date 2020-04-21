@@ -7,7 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name="comuserhealthinfo")

@@ -65,4 +65,17 @@ public class EpidemicNumber {
     public void setGoDoctorAndDiagnosisNumber(Integer goDoctorAndDiagnosisNumber) {
         this.goDoctorAndDiagnosisNumber = goDoctorAndDiagnosisNumber;
     }
+
+    @Override
+    public String toString() {
+        return "EpidemicNumber{" +
+                "coughNumber=" + coughNumber +
+                ", shortBreathNumber=" + shortBreathNumber +
+                ", goDoctorNumber=" + goDoctorNumber +
+                ", quarantineNumber=" + quarantineNumber +
+                ", diagnosisNumber=" + diagnosisNumber +
+                ", suspectedNumber=" + suspectedNumber +
+                ", goDoctorAndDiagnosisNumber=" + goDoctorAndDiagnosisNumber +
+                '}';
+    }
 }

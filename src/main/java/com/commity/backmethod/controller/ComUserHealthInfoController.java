@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -35,7 +35,7 @@ public class ComUserHealthInfoController {
          */
         for (ComUserHealthInfo userHealthInfo : comUserHealthInfo) {
             if (comUserHealthInfoService.getUserInfo(userHealthInfo.getUserId()) != null) {
-                System.out.println("不可重复提交");
+                System.out.println("不可重复提交健康信息");
                 return ResultFactory.buildFailResult("不可以重复登记");
             }
         }
@@ -54,9 +54,17 @@ public class ComUserHealthInfoController {
     @PostMapping(value="/api/getEpidemicNumber")
     @ResponseBody
     public Result getEpidemicNumber(@RequestBody Date date){
+        /**
+         * 这里存在前端时间传递过来不对的问题，还需要处理一下格式问题。
+         */
+        java.util.Date date1=new java.util.Date();
+        java.sql.Date date2=new java.sql.Date(date1.getTime());
+        date=date2;
         List<EpidemicNumber> list=new ArrayList<>();
         DayBefore dayBefore=new DayBefore(date);
+
         List<Date> dateList=dayBefore.beforeDays();
+        for (Date value : dateList) System.out.println(value);
         for(int i=0;i<7;i++){
             EpidemicNumber epidemicNumber = new EpidemicNumber();
             epidemicNumber.setCoughNumber(comUserHealthInfoService.getCountCough(dateList.get(i),"是"));
@@ -67,6 +75,10 @@ public class ComUserHealthInfoController {
             epidemicNumber.setShortBreathNumber(comUserHealthInfoService.getCountShortBreath(dateList.get(i),"是"));
             epidemicNumber.setSuspectedNumber(comUserHealthInfoService.getCountSuspected(dateList.get(i),"是"));
             list.add(epidemicNumber);
+        }
+        for(int i=0;i<7;i++){
+            System.out.println("获取折线图信息");
+            System.out.println(list.get(i));
         }
         return ResultFactory.buildSuccessResult(list);
     }

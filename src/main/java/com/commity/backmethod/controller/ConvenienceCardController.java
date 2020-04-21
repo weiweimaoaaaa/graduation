@@ -78,7 +78,9 @@ public class ConvenienceCardController {
     @PostMapping(value="/api/getApplyStatus")//获取申请信息状态
     public Result use(@RequestBody  ConvenienceCard convenienceCard){
         String userId=convenienceCard.getUser();//用户ID。
-        Date date=new Date();//获取当前时间
+        java.util.Date date1=new Date();//获取当前时间
+        java.sql.Date date=new java.sql.Date(date1.getTime());
+
         if(Math.abs(GapDate.gapDistanceDay(date,convenienceCard.getUserDate()))>1){//处理时间已经过去了。
             ConvenienceCard convenienceCard1;
             convenienceCard1 = convenienceCard;

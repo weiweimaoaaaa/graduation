@@ -10,7 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import java.sql.Date;
 
 @Entity
-@Table(name="comuserhealthinfo")
+@Table(name="com_user_health_info")
 @JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
 public class ComUserHealthInfo {
     @Id

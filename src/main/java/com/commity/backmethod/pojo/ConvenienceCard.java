@@ -11,7 +11,7 @@ import java.util.Date;
  * 便民卡实体
  */
 @Entity
-@Table(name="conveniencecard")//对应表名
+@Table(name="convenience_card")//对应表名
 public class ConvenienceCard {
     @Id
     @Column(name="id")//主码

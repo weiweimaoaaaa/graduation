@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="preventionknowledge")
+@Table(name="prevention_knowledge")
 public class Knowledge {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)

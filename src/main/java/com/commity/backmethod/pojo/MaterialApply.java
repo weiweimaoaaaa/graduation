@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="materialapply")
+@Table(name="material_apply")
 public class MaterialApply {
     @Id
     @Column(name="id")

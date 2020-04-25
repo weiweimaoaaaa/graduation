@@ -71,17 +71,11 @@ public class ComUserInfoController {
     @ResponseBody
     @PostMapping(value="/api/getFamilyInfo")
     public Result getUserInfo( @RequestBody  String idCard){
-        //System.out.println("参数id"+idCard);
         idCard= HtmlUtils.htmlEscape(idCard);
-//        String id=idCard.replace(" ","\"");
-//        id=id.trim();
-//        //System.out.println("修改后参数id"+idCard);
         int begin=6;
         int end=idCard.length()-6;
         String id =idCard.substring(begin,end);
-//        BigInteger ids=new BigInteger(idCard);
-//        String id=ids.toString();
-        System.out.println("去掉双引号"+id);
+        System.out.println("用户信息登记时，处理后的用户id"+id);
         ComUserInfo comUserInfo=comUserInfoService.getInfo(id);
         if(null==comUserInfo){
             System.out.println("用户信息获取失败");
@@ -89,7 +83,6 @@ public class ComUserInfoController {
         }
         System.out.println("用户信息"+comUserInfo);
         String address=comUserInfo.getAddress();//获取用户的地址信息，便于找出同住人的所有信息
-        System.out.println("用户地址信息"+address);
         List<ComUserInfo> user=comUserInfoService.getFamilyInfo(address);
         System.out.println(user);
         if(null==user)

@@ -22,6 +22,7 @@ public class EpidemicRealm extends AuthorizingRealm {
     }
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+        System.out.println("realm层输出");
         String userName = authenticationToken.getPrincipal().toString();
         System.out.println("realm层,用户名"+userName);
         UserLogin user = userLoginService.getByName(userName);

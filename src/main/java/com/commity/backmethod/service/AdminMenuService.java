@@ -30,8 +30,11 @@ public class AdminMenuService {
 
     public List<AdminMenu> getMenusByCurrentUser() {
         // Get current user in DB.
+        System.out.println("菜单的加载初始化函数");
         String username = SecurityUtils.getSubject().getPrincipal().toString();
+        System.out.println("加载菜单时，获取当前用户的姓名:"+username);
         UserLogin user = userService.findByUsername(username);
+        System.out.println("加载菜单时，从数据库获取用户的信息："+user);
 
         // Get roles' ids of current user.
         List<Integer> rids = adminUserRoleService.listAllByUid(user.getIdCard())
@@ -44,6 +47,7 @@ public class AdminMenuService {
 
         // Adjust the structure of the menu.
         handleMenus(menus);
+        System.out.println("加载菜单时，菜单列表"+menus);
         return menus;
     }
 

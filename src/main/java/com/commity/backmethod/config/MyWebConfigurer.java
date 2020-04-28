@@ -13,10 +13,11 @@ public class MyWebConfigurer implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         //所有请求都允许跨域，使用这种配置方法就不能在 interceptor 中再配置 header 了
         registry.addMapping("/**")
-                .allowCredentials(true)
+                .allowCredentials(false)
                 .allowedOrigins("http://localhost:8080")
                 .allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE")
-                .allowedHeaders("*")
+                .allowedHeaders("*","header1", "header2", "header3")
+                .exposedHeaders("header1", "header2")
                 .maxAge(3600);
     }
 

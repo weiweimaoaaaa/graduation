@@ -12,20 +12,23 @@ import java.util.List;
 @ToString
 public class UserDTO implements OutputConverter<UserDTO, UserLogin> {
 
-    private int id;
+    private String idCard;
     private String username;
     private String name;
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
+    }
+
     private boolean enabled;
 
     private List<AdminRole> roles;
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;

@@ -2,7 +2,6 @@ package com.commity.backmethod.dao;
 
 import com.commity.backmethod.pojo.ComUserHealthInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
-import sun.util.resources.ga.LocaleNames_ga;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.beans.IntrospectionException;

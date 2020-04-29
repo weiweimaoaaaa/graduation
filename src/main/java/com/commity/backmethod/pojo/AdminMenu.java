@@ -4,7 +4,6 @@ package com.commity.backmethod.pojo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.ToString;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,15 +16,15 @@ public class AdminMenu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private Integer id;
-    private String path;
-    private String name;
-    private String nameZh;
-    private String iconCls;
-    private String component;
-    private Integer parentId;
+    private Integer id;//菜单节点id
+    private String path;//菜单路径
+    private String name;//菜单名称
+    private String nameZh;//中文名称
+    private String iconCls;//图标
+    private String component;//组件
+    private Integer parentId;//父节点菜单
     @Transient
-    private List<AdminMenu> children;
+    private List<AdminMenu> children;//子菜单节点
 
     public List<AdminMenu> getChildren() {
         return children;

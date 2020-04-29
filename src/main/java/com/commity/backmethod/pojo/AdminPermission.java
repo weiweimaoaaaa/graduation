@@ -15,22 +15,22 @@ public class AdminPermission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private int id;//Id
 
     /**
      * Permission name;
      */
-    private String name;
+    private String name;//权限名称
 
     /**
      * Permission's description(in Chinese)
      */
-    private String desc_;
+    private String desc_;//权限描述
 
     /**
      * The path which triggers permission check.
      */
-    private String url;
+    private String url;//权限路径
 
     public int getId() {
         return id;

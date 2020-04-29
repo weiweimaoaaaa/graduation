@@ -18,21 +18,21 @@ public class AdminRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private Integer id;
-    private String  name;
-    private String  nameZh;
-    private boolean enabled;
+    private Integer id;//角色ID
+    private String  name;//角色名称
+    private String  nameZh;//中文名称
+    private boolean enabled;//角色状态
     /**
      * Transient property for storing permissions owned by current role.
      */
     @Transient
-    private List<AdminPermission> perms;
+    private List<AdminPermission> perms;//角色权限
 
     /**
      * Transient property for storing menus owned by current role.
      */
     @Transient
-    private List<AdminMenu> menus;
+    private List<AdminMenu> menus;//当前角色菜单(角色能获取的菜单)
 
     public List<AdminPermission> getPerms() {
         return perms;

@@ -6,11 +6,18 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
+/**
+ *角色菜单映射关系实体
+ * 属性1：表的id
+ * 属性2：角色id
+ * 属性3：菜单id
+ */
 @Data
 @Entity
 @Table(name = "admin_role_menu")
 @ToString
 @JsonIgnoreProperties({"handler", "hibernateLazyInitializer"})
+
 public class AdminRoleMenu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

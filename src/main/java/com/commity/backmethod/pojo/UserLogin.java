@@ -1,24 +1,30 @@
 package com.commity.backmethod.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
+@ToString
 @Table(name = "user_login")
-//@JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
+@JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
 public class UserLogin {
     @Id
     @Column(name = "id_card")
-    private String idCard;
-    private String username;
-    private String password;
-    private String salt;
+    private String idCard;//身份证
+    private String username;//姓名
+    private String password;//密码
+    private String salt;//盐
     private boolean enabled;
     @Transient
-    private List<AdminRole> roles;
+    private List<AdminRole> roles;//用户角色
 
     public String getIdCard() {
         return idCard;

@@ -16,6 +16,12 @@ public class UserDTO implements OutputConverter<UserDTO, UserLogin> {
     private String username;
     private String name;
 
+
+
+    private boolean enabled;
+
+    private List<AdminRole> roles;
+
     public String getIdCard() {
         return idCard;
     }
@@ -23,12 +29,6 @@ public class UserDTO implements OutputConverter<UserDTO, UserLogin> {
     public void setIdCard(String idCard) {
         this.idCard = idCard;
     }
-
-    private boolean enabled;
-
-    private List<AdminRole> roles;
-
-
 
     public String getUsername() {
         return username;

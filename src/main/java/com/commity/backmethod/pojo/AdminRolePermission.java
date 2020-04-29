@@ -6,6 +6,12 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
+/**
+ * 角色权限映射关系实体
+ * 属性1：表id
+ * 属性2：角色id
+ * 属性3：权限id
+ */
 @Data
 @Entity
 @Table(name = "admin_role_permission")

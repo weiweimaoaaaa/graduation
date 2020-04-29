@@ -30,4 +30,15 @@ public class VisitorService {
     public Visitor register(Visitor visitor){
         return visitorDao.save(visitor);
     }
+
+    /**
+     * 删除外来人员信息
+     * @param visitor 外来人员
+     */
+    public void delete(Visitor visitor){
+         visitorDao.delete(visitor);
+    }
+    public Visitor update(Visitor visitor){
+        return visitorDao.save(visitor);
+    }
 }

@@ -1,9 +1,9 @@
 package com.commity.backmethod.pojo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -12,9 +12,12 @@ import java.sql.Time;
 public class Visitor {
     @Id
     @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;//id
     private String name;//姓名
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;//到访日期
+    @JsonFormat(pattern = "HH:mm:ss")
     private Time time;//到访时间
     private String idCard;//身份证号
     private String phone;//联系电话
@@ -80,7 +83,7 @@ public class Visitor {
         this.temperature = temperature;
     }
 
-    public String isDiagnose() {
+    public String getDiagnose() {
         return diagnose;
     }
 
@@ -110,5 +113,22 @@ public class Visitor {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "Visitor{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", date=" + date +
+                ", time=" + time +
+                ", idCard='" + idCard + '\'' +
+                ", phone='" + phone + '\'' +
+                ", temperature=" + temperature +
+                ", diagnose='" + diagnose + '\'' +
+                ", item='" + item + '\'' +
+                ", accessObject='" + accessObject + '\'' +
+                ", address='" + address + '\'' +
+                '}';
     }
 }

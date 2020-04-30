@@ -1,16 +1,21 @@
 package com.commity.backmethod.controller;
 
+import com.commity.backmethod.pojo.Apply;
 import com.commity.backmethod.pojo.MaterialApply;
 import com.commity.backmethod.result.Result;
 import com.commity.backmethod.result.ResultFactory;
 import com.commity.backmethod.service.MaterialApplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Arrays;
 import java.util.List;
+
+import static com.commity.backmethod.pojo.Apply.TISSUE;
 
 @Controller
 public class MaterialApplyController {
@@ -78,6 +83,31 @@ public class MaterialApplyController {
             return ResultFactory.buildFailResult("申请失败");
         }
         return ResultFactory.buildSuccessResult(materials);//返回申请的信息
+    }
+
+    /**
+     * 物资信息报表
+     * @return 物资信息报表
+     */
+    @ResponseBody
+    @GetMapping(value="/api/materialInfoList")
+    public Result MaterialInfoList(){
+        java.util.Date date1=new java.util.Date();
+        java.sql.Date date=new java.sql.Date(date1.getTime());
+        //当日物资信息
+        List<MaterialApply> materialApplies=materialApplyService.getMaterialByDate(date);
+        for (MaterialApply materialApply : materialApplies) materialApply.setFinished(2);
+        materialApplyService.registerMaterialsInfo(materialApplies);
+        System.out.print("当前日期:"+date);
+        System.out.println("   当日物资信息:"+materialApplies);
+        Integer[] detailed =new Integer[17];
+        String [] names={"卫生纸（袋）","牙膏（支）","洗发液（瓶）","沐浴露（瓶）","消毒液","酒精","棉签","999感冒灵","板蓝根","布洛芬","米","盐","油","萝卜","白菜","辣椒酱","茄子"};
+        for(int i=0;i<17;i++){
+            detailed[i]=materialApplyService.getMaterialByDateAndName(date,names[i]);
+        }
+        //System.out.println(detailed[Apply.TISSUE]);
+        Object[] info={materialApplies,detailed};
+        return ResultFactory.buildSuccessResult(info);
     }
 
 }

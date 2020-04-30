@@ -7,14 +7,11 @@ import com.commity.backmethod.result.ResultFactory;
 import com.commity.backmethod.service.VisitorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class VisitorController {
 
     @Autowired
@@ -23,19 +20,17 @@ public class VisitorController {
      * 显示外来人员信息
      * @return 外来人员的信息列表
      */
-    @CrossOrigin
-    @ResponseBody
+
     @PostMapping(value="/api/listVisitorsInfo")
     public Result listVisitorsInfo(){
         List<Visitor> info=visitorService.listVisitorsInfo();
-        //System.out.println(info.get(0).getDiagnose());//调试信息
+        System.out.println(info.get(0).getDiagnose());//调试信息
         if(info.size()==0){
             return ResultFactory.buildFailResult("获取外来人员信息失败");
         }
         return ResultFactory.buildSuccessResult(info);
     }
-    @CrossOrigin
-    @ResponseBody
+
     @PostMapping(value="/api/visitorRegister")
     public Result register(@RequestBody Visitor visitor){
         System.out.println(visitor);
@@ -45,15 +40,13 @@ public class VisitorController {
         }
         return ResultFactory.buildSuccessResult(visitor1);
     }
-    @CrossOrigin
-    @ResponseBody
+
     @PostMapping(value = "/api/deleteVisitorInfo")
     public Result delete(@RequestBody Visitor visitor){
         visitorService.delete(visitor);
         return ResultFactory.buildSuccessResult("成功删除人员信息");
     }
-    @CrossOrigin
-    @ResponseBody
+
     @PostMapping(value = "/api/updateVisitorInfo")
     public Result update(@RequestBody Visitor visitor){
         Visitor visitor1=visitorService.update(visitor);

@@ -16,6 +16,7 @@ public class AdminUserRoleService {
     @Autowired
     AdminUserRoleDao adminUserRoleDAO;
 
+    //返回该用户对应的所有的角色id。
     public List<AdminUserRole> listAllByUid(String uid) {
         return adminUserRoleDAO.findAllByUid(uid);
     }

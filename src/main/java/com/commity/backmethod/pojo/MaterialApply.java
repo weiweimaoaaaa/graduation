@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name="material_apply")
@@ -20,7 +20,7 @@ public class MaterialApply {
     private Date applyDate;//申请时间
     private String category;//物资分类
     private String name;//物资名字
-    private String number;//物资数量
+    private Integer number;//物资数量
     private Integer finished;//完成度
 
     public String getId() {
@@ -63,11 +63,11 @@ public class MaterialApply {
         this.name = name;
     }
 
-    public String getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 

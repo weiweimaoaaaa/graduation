@@ -7,6 +7,7 @@ import com.commity.backmethod.result.ResultFactory;
 import com.commity.backmethod.service.ComUserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -90,5 +91,18 @@ public class ComUserInfoController {
             return ResultFactory.buildFailResult("获取失败");
         }
         else return ResultFactory.buildSuccessResult(user);
+    }
+
+    /**
+     * 获取当天未填报健康信息表的人员信息表
+     * @return
+     */
+    @GetMapping(value = "/api/getUsersWithoutRegisterHealthInfo")
+    @ResponseBody
+    public Result getUsersWithoutRegisterHealthInfo(){
+        java.util.Date date1=new java.util.Date();
+        java.sql.Date date=new java.sql.Date(date1.getTime());
+        List<ComUserInfo> comUserInfoList=comUserInfoService.getUsersWithoutRegisterHealthInfo(date);
+        return ResultFactory.buildSuccessResult(comUserInfoList);
     }
 }

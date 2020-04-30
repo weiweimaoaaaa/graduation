@@ -74,10 +74,6 @@ public class AdminRole {
         this.nameZh = nameZh;
     }
 
-    public boolean getEnabled() {
-        return enabled;
-    }
-
     public void setEnabled(boolean enable) {
         this.enabled = enable;
     }

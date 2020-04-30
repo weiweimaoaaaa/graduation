@@ -24,6 +24,8 @@ public class URLPathMatchingFilter extends PathMatchingFilter {
     protected boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+        //httpServletResponse.setHeader("Access-Control-Allow-Origin","*");
+        //httpServletResponse.setHeader("Cache-Control","no-cache");
 
         if (HttpMethod.OPTIONS.toString().equals((httpServletRequest).getMethod())) {
             httpServletResponse.setStatus(HttpStatus.NO_CONTENT.value());
@@ -60,14 +62,7 @@ public class URLPathMatchingFilter extends PathMatchingFilter {
                     break;
                 }
             }
-
-            if (hasPermission) {
-                //log.trace("用户：" + username + "访问了：" + requestAPI + "接口");
-                return true;
-            } else {
-               // log.warn( "用户：" + username + "访问了没有权限的接口：" + requestAPI);
-                return false;
-            }
+            return hasPermission;
         }
     }
 }

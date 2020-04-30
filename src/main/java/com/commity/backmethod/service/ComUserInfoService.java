@@ -1,11 +1,14 @@
 package com.commity.backmethod.service;
 
+import com.commity.backmethod.dao.ComUserHealthInfoDao;
 import com.commity.backmethod.dao.ComUserInfoDao;
+import com.commity.backmethod.pojo.ComUserHealthInfo;
 import com.commity.backmethod.pojo.ComUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +17,8 @@ public class ComUserInfoService  {
 
     @Autowired
     ComUserInfoDao comUserInfoDao;//用户信息查询的接口
+    @Autowired
+    ComUserHealthInfoDao comUserHealthInfoDao;//健康信息统计的接口
     public Boolean isExist(String id)//当前用户是否存在
     {
         return null!=comUserInfoDao.getComUserInfoById(id);
@@ -44,9 +49,20 @@ public class ComUserInfoService  {
     }
     public ComUserInfo getInfo(String id )
     {
-        ComUserInfo info= comUserInfoDao.findComUserInfoById(id);
-       // System.out.println("服务层信息"+info);
-        return info;
+        // System.out.println("服务层信息"+info);
+        return comUserInfoDao.findComUserInfoById(id);
     }
-
+    public List<ComUserInfo> getUsersWithoutRegisterHealthInfo(Date date){
+        List<ComUserHealthInfo> comUserHealthInfoList=comUserHealthInfoDao.findComUserHealthInfoByDate(date);
+        System.out.println(comUserHealthInfoList);
+        List<String> id=new ArrayList<>();
+        for (ComUserHealthInfo comUserHealthInfo : comUserHealthInfoList) {
+            id.add(comUserHealthInfo.getUserId());
+        }
+        //调试
+        List<ComUserInfo> comUserInfoList=comUserInfoDao.findComUserInfosByIdIn(id);//当天的填报健康信息的用户人信息
+        System.out.println("填报健康信息的人员"+comUserInfoList);
+        //返回当天未填报的人员信息
+        return comUserInfoDao.findComUserInfoByIdIsNotIn(id);
+    }
 }

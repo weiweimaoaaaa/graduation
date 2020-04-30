@@ -3,6 +3,7 @@ package com.commity.backmethod.service;
 
 import com.commity.backmethod.dao.ComUserHealthInfoDao;
 import com.commity.backmethod.pojo.ComUserHealthInfo;
+import com.commity.backmethod.pojo.ComUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

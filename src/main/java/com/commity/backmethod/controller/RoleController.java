@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 public class RoleController {
     @Autowired
     AdminRoleService adminRoleService;
@@ -26,13 +26,12 @@ public class RoleController {
     @Autowired
     AdminRoleMenuService adminRoleMenuService;
 
-    @ResponseBody
+
     @GetMapping("/api/admin/role")
     public Result listRoles() {
         return ResultFactory.buildSuccessResult(adminRoleService.listWithPermsAndMenus());
     }
 
-    @ResponseBody
     @PutMapping("/api/admin/role/status")
     public Result updateRoleStatus(@RequestBody AdminRole requestRole) {
         AdminRole adminRole = adminRoleService.updateRoleStatus(requestRole);
@@ -40,7 +39,6 @@ public class RoleController {
         return ResultFactory.buildSuccessResult(message);
     }
 
-    @ResponseBody
     @PutMapping("/api/admin/role")
     public Result editRole(@RequestBody AdminRole requestRole) {
         adminRoleService.addOrUpdate(requestRole);
@@ -50,20 +48,17 @@ public class RoleController {
     }
 
 
-    @ResponseBody
     @PostMapping("/api/admin/role")
     public Result addRole(@RequestBody AdminRole requestRole) {
         adminRoleService.editRole(requestRole);
         return ResultFactory.buildSuccessResult("修改用户成功");
     }
 
-    @ResponseBody
     @GetMapping("/api/admin/role/perm")
     public Result listPerms() {
         return ResultFactory.buildSuccessResult(adminPermissionService.list());
     }
 
-    @ResponseBody
     @PutMapping("/api/admin/role/menu")
     public Result updateRoleMenu(@RequestParam int rid, @RequestBody Map<String, List<Integer>> menusIds) {
         adminRoleMenuService.updateRoleMenu(rid, menusIds);

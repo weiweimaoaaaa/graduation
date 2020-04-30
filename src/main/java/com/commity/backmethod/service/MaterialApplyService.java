@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -79,4 +81,29 @@ public class MaterialApplyService {
     public List<MaterialApply> getMaterialByCategoryAndName(String category,String name){
         return materialApplyDao.findByCategoryAndName(category, name);
     }
+
+    /**
+     * 获取当日的物资申请信息
+     * @param date 当前日期
+     * @param name 名称
+     * @return 返回当前日期的各种东西的数量
+     */
+    public Integer getMaterialByDateAndName(Date date, String name){
+        Integer number=0;
+        List<MaterialApply>materialApplies= materialApplyDao.findMaterialApplyByApplyDateAndNameLike(date,name);
+        for (MaterialApply materialApply : materialApplies) {
+            number += materialApply.getNumber();
+        }
+        return number;
+    }
+
+    /**
+     * 获取当前的物资信息列表
+     * @param date 日期
+     * @return 物资信息列表
+     */
+    public List<MaterialApply> getMaterialByDate(Date date){
+        return materialApplyDao.findMaterialApplyByApplyDate(date);
+    }
+
 }

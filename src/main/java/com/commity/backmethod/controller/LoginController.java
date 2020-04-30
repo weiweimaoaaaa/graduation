@@ -15,13 +15,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
 
-@Controller
+@RestController
 public class LoginController {
     @Autowired
     UserLoginService userLoginService;
-    @CrossOrigin
     @PostMapping(value = "/api/login")
-    @ResponseBody
     public Result login(@RequestBody UserLogin requestUser) {
         String username = requestUser.getUsername();
         System.out.println("登陆时,用户名："+username);
@@ -58,9 +56,7 @@ public class LoginController {
 //            return new Result(200,"成功登录",user);
 //        }
     }
-    @CrossOrigin
     @PostMapping(value = "/api/signin")
-    @ResponseBody
     public Result register (@RequestBody UserLogin requestUser)
     {
              System.out.println("控制层"+requestUser);
@@ -71,7 +67,6 @@ public class LoginController {
           default:return ResultFactory.buildSuccessResult("未知错误");
         }
     }
-    @ResponseBody
     @GetMapping("api/logout")
     public Result logout() {
         Subject subject = SecurityUtils.getSubject();
@@ -79,9 +74,10 @@ public class LoginController {
         String message = "成功登出";
         return ResultFactory.buildSuccessResult(message);
     }
-    @ResponseBody
     @GetMapping("/api/authentication")
     public String authentication() {
+
+        System.out.println("身份认证成功");
         return "身份认证成功";
     }
 }

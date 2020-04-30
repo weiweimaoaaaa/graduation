@@ -10,6 +10,8 @@ public interface ComUserInfoDao extends JpaRepository<ComUserInfo,String> {
     ComUserInfo findComUserInfoById(String id);
    // ComUserInfo getComUserInfoBysAddress(String address);
     List<ComUserInfo> findComUserInfoByAddress(String address);
+    List<ComUserInfo> findComUserInfosByIdIn(List<String> id);
    // ComUserInfo
     //ComUserInfo getById(String)
+    List<ComUserInfo> findComUserInfoByIdIsNotIn(List<String> idList);
 }

@@ -8,19 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class MenuController {
     @Autowired
     AdminMenuService adminMenuService;
-
-    @ResponseBody
     @GetMapping("/api/menu")
     public Result menu() {
 
         return ResultFactory.buildSuccessResult(adminMenuService.getMenusByCurrentUser());
     }
-    @ResponseBody
     @GetMapping("/api/admin/role/menu")
     public Result listAllMenus() {
         return ResultFactory.buildSuccessResult(adminMenuService.getMenusByRoleId(1));

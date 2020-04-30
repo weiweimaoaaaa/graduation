@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.commity.backmethod.pojo.Apply.TISSUE;
+import static com.commity.backmethod.pojo.Apply.TOOTHPASTE;
 
 @Controller
 public class MaterialApplyController {
@@ -100,12 +101,14 @@ public class MaterialApplyController {
         materialApplyService.registerMaterialsInfo(materialApplies);
         System.out.print("当前日期:"+date);
         System.out.println("   当日物资信息:"+materialApplies);
-        Integer[] detailed =new Integer[17];
+        Integer[] detailed =new Integer[17];//存放各种物资的数量的数组
         String [] names={"卫生纸（袋）","牙膏（支）","洗发液（瓶）","沐浴露（瓶）","消毒液","酒精","棉签","999感冒灵","板蓝根","布洛芬","米","盐","油","萝卜","白菜","辣椒酱","茄子"};
         for(int i=0;i<17;i++){
             detailed[i]=materialApplyService.getMaterialByDateAndName(date,names[i]);
         }
-        //System.out.println(detailed[Apply.TISSUE]);
+        System.out.println("物资统计信息");
+        System.out.println(TISSUE.getName()+" "+detailed[TISSUE.getIndex()]);
+        System.out.println(TOOTHPASTE.getName()+" "+detailed[TOOTHPASTE.getIndex()]);
         Object[] info={materialApplies,detailed};
         return ResultFactory.buildSuccessResult(info);
     }

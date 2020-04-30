@@ -70,7 +70,7 @@ public class AdminPermissionService {
                 .stream().map(AdminRole::getId).collect(Collectors.toList());
 
         //根据角色获取权限id
-        List<Integer> pids = adminRolePermissionDAO.findAllByRid(rids)
+        List<Integer> pids = adminRolePermissionDAO.findAllByRidIn(rids)
                 .stream().map(AdminRolePermission::getPid).collect(Collectors.toList());
 
         //根据权限id获取权限的url
